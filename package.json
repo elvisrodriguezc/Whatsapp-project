@@ -8,8 +8,18 @@
     "dev": "nodemon ./src/app.js",
     "eslint": "eslint --ignore-path .gitignore .",
     "prettier": "prettier --write '**/*.js' --ignore-path .gitignore .",
-    "test": "mocha ./src/**/test/*.test.js"
+    "test": "PORT=5050 mocha ./src/**/test/*.test.js"
   },
+  "keywords": [
+    "whatsapp",
+    "api",
+    "node",
+    "express",
+    "mocha",
+    "chai",
+    "sinon",
+    "jest"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SheykoWk/academlo-Whatsapp-proyect.git"

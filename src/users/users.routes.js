@@ -9,11 +9,11 @@ router
         passport.authenticate('jwt', { session: false }),
         userServices.getAllUsers
     );
-router.route('/me').get(
-    passport.authenticate('jwt', { session: false }),
-
-    userServices.getMyUserData
-);
+router
+    .route('/me').get(
+        passport.authenticate('jwt', { session: false }),
+        userServices.getMyUserData
+    );
 router
     .route('/:uuid')
     .get(

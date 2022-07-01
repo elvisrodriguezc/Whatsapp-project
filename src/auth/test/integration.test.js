@@ -1,32 +1,25 @@
-before(() => {
-    registerUser({
-        firstname: 'UserTest',
-        lastname: 'LastNaemeTest',
-        email: 'test@someone.com',
-        password: '123456',
-        phone: '123456789'
-    })
-})
-after(() => {
-    sequelize.query('DELETE FROM users WHERE email = \'sdsdsdddds\'')
-})
-describe('User', () => {
-    it('should create a user', async () => {
-        const user = await registerUser({
-            firstname: 'UserTest',
-            lastname: 'LastNaemeTest',
-            email: 'test@satelital.com',
-            password: '123456',
-            phone: '123456789'
-        })
-        expect(user).to.be.an('object')
-        expect(user.id).to.be.a('number')
-        expect(user.firstname).to.be.a('string')
-        expect(user.lastname).to.be.a('string')
-        expect(user.email).to.be.a('string')
-        expect(user.password).to.be.a('string')
-        expect(user.phone).to.be.a('string')
-        expect(user.createdAt).to.be.a('date')
-        expect(user.updatedAt).to.be.a('date')
-    })
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+
+const app = require('../../app').app
+
+chai.use(chaiHttp)
+const email = 'sahid.kick@academlo.com'
+const password = '123456'
+const testUuid = 'fa48c86e-6608-4fd0-a4bc-520add862f9c'
+
+
+describe('Integration suite AUTH endpoints test', () => {
+    it("Should return the AUTHORIZATION with a token for response STATUS 200", (done) => {
+        chai
+            .request(app)
+            .post("/api/v1/auth/login")
+            .set("content-type", "application/json")
+            .send({ email: email, password: password })
+            .end((err, res) => {
+                const token = res.body.token;
+                chai.assert.equal(res.status, 200);
+                done();
+            });
+    });
 })
